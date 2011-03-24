@@ -13,30 +13,16 @@
 # There is an example script, with two commands, yes and time.
 # Just try it out:
 #                       scrpt example time
-#
-# Now just configure the line below, to point to your data directory :D
 
-basedir="$HOME/.nexuiz"
+function error
+{
+    echo "Error: $*" >&2
+    exit 1
+}
 
-# Path to nexbash.cfg relatively to the game dir.
-nbcfg="nexbash.cfg"
 
-# UDP port to read from.
-
-port=26404
-
-# Command to use to launch Nexuiz
-
-nexcmd="/usr/bin/nexuiz"
-
-# Feel free to change this, but don't put it in a place where Nexuiz can
-# write to, or else bad admins could hurt your $HOME or execute commands
-# Safe directories are:
-#  - "hidden" directories, starting with a "."
-#  - anything that is not in the data directory (which is usually
-#     $basedir/data/ )
-
-nbscriptdir="$basedir/nexbash/scripts"
+[ -e config.sh ] || error "No configuration found. Please run \`cp EXAMPLE_confg.sh config.sh', edit config.sh and try again"
+. config.sh || error "Failed to read configuration"
 
 ######################
 # Script starts here #
